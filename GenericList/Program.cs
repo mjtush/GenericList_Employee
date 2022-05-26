@@ -52,9 +52,19 @@ namespace GenericList_Employee
         Console.WriteLine("Found employee whose name starts with J: {0}", e.MName);
       }
 
+      // Use ForEach to iterate over each item
+      empList.ForEach(TotalSalaries);
+      Console.WriteLine("Total payroll is: {0}\n", total);
 
       Console.WriteLine("\nPress Enter key to continue...");
             Console.ReadLine();
+    }
+
+    // Iterator function for the ForEach method
+    static int total = 0;
+    static void TotalSalaries(Employee e)
+    {
+      total += e.MSalary;
     }
 
     // delegate function to use for the Exists method
