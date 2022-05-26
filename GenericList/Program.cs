@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GenericList_Employee
 {
@@ -21,6 +18,18 @@ namespace GenericList_Employee
     }
   }
 
+  class EmployeeComparer : IComparer<Employee>
+  {
+    public int Compare(Employee x, Employee y)
+    {
+      if (x.MSalary > y.MSalary)
+        return 1;
+      if (x.MSalary == y.MSalary)
+        return 0;
+      else
+        return -1;
+    }
+  }
 
   class Program
   {
@@ -55,6 +64,15 @@ namespace GenericList_Employee
       // Use ForEach to iterate over each item
       empList.ForEach(TotalSalaries);
       Console.WriteLine("Total payroll is: {0}\n", total);
+
+      // Sort the list using a custom class
+      // that implements the IComparer interface
+      EmployeeComparer ec = new EmployeeComparer();
+      empList.Sort(ec);
+      foreach (Employee emp in empList)
+      {
+        Console.WriteLine("Salary for {0} is {1}", emp.MName, emp.MSalary);
+      }
 
       Console.WriteLine("\nPress Enter key to continue...");
             Console.ReadLine();
